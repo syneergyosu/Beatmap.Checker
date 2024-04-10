@@ -350,7 +350,7 @@
         async function loadBeatmapPack(targetPackNumber) {
             try {
                 // Load beatmap data from JSON file
-                const response = await fetch('./data/beatmapDataV2.json');
+                const response = await fetch('./data/BP-S1-S1407.json');
                 const data = await response.json();
 
                 // Find the target pack with the matching number
@@ -409,12 +409,27 @@
 
             // Call the loadBeatmapPack function for each beatmap pack after generating the HTML
             for (let i = start; i <= end; i++) {
-                await loadBeatmapPack(i);
+                await loadBeatmapPack(i); //this code made it load faster????
             }
         }
 
-        // Call the function to generate HTML for beatmap packs 1 to 1392 and load them
-        generateAndLoadBeatmapPacks(1, 1392);
+        // Define a function to periodically update beatmap packs
+        function updateBeatmapPacks() {
+            for (let i = 1; i <= 1407; i++) {
+                loadBeatmapPack(i);
+            }
+
+            // Call the function again after one second
+            setTimeout(updateBeatmapPacks, 3000); // Update every second
+        }
+
+        // Call the function to generate HTML for beatmap packs 1 to 1407 and load them
+        document.addEventListener("DOMContentLoaded", function () {
+            generateAndLoadBeatmapPacks(1, 1407).then(() => {
+                // After generating and loading the beatmap packs, start updating them periodically
+                updateBeatmapPacks();
+            });
+        });
     </script>
 </body >
 </html >
