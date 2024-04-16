@@ -161,7 +161,7 @@ function createBeatmapButton(id) {
 async function loadBeatmapPack(targetPackNumber) {
     try {
         // Load beatmap data from JSON file
-        const response = await fetch('./data/BP-S1-S1407.json');
+        const response = await fetch('./data/BP-S1-S10.json');
         const data = await response.json();
 
         // Find the target pack with the matching number
@@ -175,16 +175,43 @@ async function loadBeatmapPack(targetPackNumber) {
             // Clear the existing content
             targetPackUl.innerHTML = '';
 
+            // Initialize total duration variable
+            let totalDurationSeconds = 0;
+
             // Loop through beatmap IDs and create list items
-            targetPack.beatmap_ids.forEach(beatmapId => {
+            targetPack.beatmaps.forEach(beatmap => {
+                const { beatmap_id, time_duration_seconds } = beatmap;
+
                 const li = document.createElement("li");
-                li.setAttribute("data-beatmap", beatmapId);
-                li.innerHTML = `<input type="checkbox" class="checkbox">${beatmapId}`;
-                li.onclick = event => handleBeatmapClick(beatmapId, event);
+                li.setAttribute("data-beatmap", beatmap_id);
+                li.innerHTML = `<input type="checkbox" class="checkbox">${beatmap_id} (${time_duration_seconds})`;
+
+                // Add event listener to checkbox
+                const checkbox = li.querySelector(".checkbox");
+                checkbox.addEventListener("change", () => {
+                    // Update total duration when checkbox state changes
+                    if (checkbox.checked) {
+                        totalDurationSeconds -= time_duration_seconds;
+                    } else {
+                        totalDurationSeconds += time_duration_seconds;
+                    }
+                    // Update total duration list item
+                    totalLi.innerHTML = `Total Duration: ${totalDurationSeconds} seconds`;
+                });
+
+                li.onclick = event => handleBeatmapClick(beatmap_id, event);
 
                 // Append li to ul
                 targetPackUl.appendChild(li);
+
+                // Accumulate total duration
+                totalDurationSeconds += time_duration_seconds;
             });
+
+            // Create a separate list item for the total duration
+            const totalLi = document.createElement("li");
+            totalLi.innerHTML = `Total Duration: ${totalDurationSeconds} seconds`;
+            targetPackUl.appendChild(totalLi);
         } else {
             console.error(`Beatmap pack with number ${targetPackNumber} not found in the JSON file.`);
         }

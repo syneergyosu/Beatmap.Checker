@@ -1,0 +1,241 @@
+[
+  {
+    "packName": "S2",
+    "beatmaps": [
+      {
+        "beatmap_id": 102,
+        "time_duration_seconds": 195
+      },
+      {
+        "beatmap_id": 103,
+        "time_duration_seconds": 210
+      },
+      {
+        "beatmap_id": 104,
+        "time_duration_seconds": 225
+      },
+      {
+        "beatmap_id": 105,
+        "time_duration_seconds": 240
+      },
+      {
+        "beatmap_id": 107,
+        "time_duration_seconds": 255
+      },
+      {
+        "beatmap_id": 108,
+        "time_duration_seconds": 270
+      },
+      {
+        "beatmap_id": 109,
+        "time_duration_seconds": 185
+      },
+      {
+        "beatmap_id": 110,
+        "time_duration_seconds": 200
+      },
+      {
+        "beatmap_id": 220,
+        "time_duration_seconds": 220
+      },
+      {
+        "beatmap_id": 112,
+        "time_duration_seconds": 235
+      },
+      {
+        "beatmap_id": 113,
+        "time_duration_seconds": 250
+      },
+      {
+        "beatmap_id": 114,
+        "time_duration_seconds": 265
+      },
+      {
+        "beatmap_id": 115,
+        "time_duration_seconds": 280
+      },
+      {
+        "beatmap_id": 116,
+        "time_duration_seconds": 195
+      },
+      {
+        "beatmap_id": 170,
+        "time_duration_seconds": 210
+      },
+      {
+        "beatmap_id": 145,
+        "time_duration_seconds": 225
+      },
+      {
+        "beatmap_id": 120,
+        "time_duration_seconds": 240
+      },
+      {
+        "beatmap_id": 122,
+        "time_duration_seconds": 255
+      },
+      {
+        "beatmap_id": 123,
+        "time_duration_seconds": 270
+      },
+      {
+        "beatmap_id": 124,
+        "time_duration_seconds": 185
+      },
+      {
+        "beatmap_id": 125,
+        "time_duration_seconds": 200
+      },
+      {
+        "beatmap_id": 126,
+        "time_duration_seconds": 220
+      },
+      {
+        "beatmap_id": 127,
+        "time_duration_seconds": 235
+      },
+      {
+        "beatmap_id": 128,
+        "time_duration_seconds": 250
+      },
+      {
+        "beatmap_id": 129,
+        "time_duration_seconds": 265
+      },
+      {
+        "beatmap_id": 130,
+        "time_duration_seconds": 280
+      },
+      {
+        "beatmap_id": 131,
+        "time_duration_seconds": 195
+      },
+      {
+        "beatmap_id": 132,
+        "time_duration_seconds": 210
+      },
+      {
+        "beatmap_id": 133,
+        "time_duration_seconds": 225
+      },
+      {
+        "beatmap_id": 134,
+        "time_duration_seconds": 240
+      },
+      {
+        "beatmap_id": 152,
+        "time_duration_seconds": 255
+      },
+      {
+        "beatmap_id": 153,
+        "time_duration_seconds": 270
+      },
+      {
+        "beatmap_id": 137,
+        "time_duration_seconds": 185
+      },
+      {
+        "beatmap_id": 141,
+        "time_duration_seconds": 200
+      },
+      {
+        "beatmap_id": 162,
+        "time_duration_seconds": 220
+      },
+      {
+        "beatmap_id": 164,
+        "time_duration_seconds": 235
+      },
+      {
+        "beatmap_id": 144,
+        "time_duration_seconds": 250
+      },
+      {
+        "beatmap_id": 146,
+        "time_duration_seconds": 265
+      }
+    ]
+  }
+  ,
+  {
+    "packName": "S1",
+    "beatmaps": [
+      {
+        "beatmap_id": 75,
+        "time_duration_seconds": 180
+      },
+      {
+        "beatmap_id": 53,
+        "time_duration_seconds": 240
+      },
+      {
+        "beatmap_id": 54,
+        "time_duration_seconds": 200
+      },
+      {
+        "beatmap_id": 55,
+        "time_duration_seconds": 220
+      },
+      {
+        "beatmap_id": 91,
+        "time_duration_seconds": 195
+      },
+      {
+        "beatmap_id": 119,
+        "time_duration_seconds": 210
+      },
+      {
+        "beatmap_id": 80,
+        "time_duration_seconds": 185
+      },
+      {
+        "beatmap_id": 86,
+        "time_duration_seconds": 230
+      },
+      {
+        "beatmap_id": 87,
+        "time_duration_seconds": 255
+      },
+      {
+        "beatmap_id": 88,
+        "time_duration_seconds": 270
+      },
+      {
+        "beatmap_id": 165,
+        "time_duration_seconds": 240
+      },
+      {
+        "beatmap_id": 121,
+        "time_duration_seconds": 215
+      },
+      {
+        "beatmap_id": 188,
+        "time_duration_seconds": 280
+      },
+      {
+        "beatmap_id": 94,
+        "time_duration_seconds": 190
+      },
+      {
+        "beatmap_id": 95,
+        "time_duration_seconds": 225
+      },
+      {
+        "beatmap_id": 96,
+        "time_duration_seconds": 250
+      },
+      {
+        "beatmap_id": 97,
+        "time_duration_seconds": 275
+      },
+      {
+        "beatmap_id": 101,
+        "time_duration_seconds": 195
+      },
+      {
+        "beatmap_id": 100,
+        "time_duration_seconds": 210
+      }
+    ]
+  }
+]
