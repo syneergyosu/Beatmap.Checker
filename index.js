@@ -62,7 +62,7 @@ function updateProgressBar() {
 
     var progressPercentage = (checkedCheckboxCount / totalCheckboxCount) * 100;
     progressBar.style.width = progressPercentage + '%';
-    progressBar.innerText = progressPercentage.toFixed(2) + '% Complete';
+    progressBar.innerText = progressPercentage.toFixed(2) + '%';
 
     console.log(`Total Checkboxes: ${totalCheckboxCount}, Checked Checkboxes: ${checkedCheckboxCount}`);
     console.log("Total Checkboxes:", totalCheckboxCount);
@@ -71,7 +71,7 @@ function updateProgressBar() {
 
     // Calculate unchecked count and update in display
     var uncheckedCount = totalCheckboxCount - checkedCheckboxCount;
-    document.getElementById('uncheckedCount').textContent = `Uncleared Beatmaps: ${uncheckedCount}`;
+    document.getElementById('uncheckedCount').textContent = `Uncleared: ${uncheckedCount}`;
 }
 
 // Import .txt file that contains the beatmap ids

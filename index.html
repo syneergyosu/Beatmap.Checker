@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beatmap Selector</title>
+    <title>Beatmap Checker</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
 </head>
 <body>
     <h1>Beatmap Checker</h1>
-
     <!--Progress Bar Section-->
     <div class="progress-container">
-        <div class="progress-bar" id="progressBar">0%</div>
+        <div class="progress-bar" id="progressBar">0.00%</div>
     </div>
 
     <!-- File Upload Section -->
     <div class="file-upload-container">
-        <label for="fileInput" class="file-button">Choose File</label>
+        <label for="fileInput" class="file-button">Import File</label>
         <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="updateFileName()">
         <span id="fileName">No file chosen</span>
-        <button class="import-button" onclick="importBeatmaps()">Import</button>
-        <button class="export-button" onclick="exportBeatmaps()">Export</button>
-        <span id="uncheckedCount">Uncleared Beatmaps : 0</span>
+        <button class="export-button" onclick="exportBeatmaps()">Export File</button>
+        <button class="import-button" onclick="importBeatmaps()">Update Packs</button>
+        <span id="uncheckedCount">Uncleared: 0</span>
     </div>
 
     <!-- Dynamic Buttons Section -->
