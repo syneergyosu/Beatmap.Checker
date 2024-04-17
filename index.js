@@ -164,7 +164,7 @@ let overallTotalTimeDurationSeconds = 0;
 // Function to update overall total time duration in HTML
 function updateOverallTotalTimeDuration() {
     const overallTotalTimeDurationElement = document.getElementById("overallTotalTimeDuration");
-    overallTotalTimeDurationElement.textContent = `Total Time: ${overallTotalTimeDurationSeconds}`;
+    overallTotalTimeDurationElement.textContent = `Total Time: ${overallTotalTimeDurationSeconds} h`;
 }
 
 // Json Fetch Method
@@ -240,18 +240,28 @@ async function loadBeatmapPack(targetPackNumber) {
 
 // Function to calculate overall total time duration
 function calculateOverallTotalTime() {
-    let overallTotalTime = 0;
+    let overallTotalTimeSeconds = 0;
     // Iterate through each pack's total time duration and sum them up
     const packLists = document.querySelectorAll("[id^=bp][id$=BeatmapList] li");
     packLists.forEach(listItem => {
         const timeString = listItem.textContent.split(": ")[1]; // Extracting the time duration string
         const timeInSeconds = parseInt(timeString); // Parsing the time duration to an integer
         if (!isNaN(timeInSeconds)) { // Checking if the parsed time is a valid number
-            overallTotalTime += timeInSeconds; // Accumulating the time duration
+            overallTotalTimeSeconds += timeInSeconds; // Accumulating the time duration
         }
     });
-    return overallTotalTime;
+
+    // Convert overall total time duration from seconds to hours with decimals
+    const overallTotalTimeHours = overallTotalTimeSeconds / 3600.0;
+
+    // Round the total time to 2 decimal places
+    const overallTotalTimeRounded = overallTotalTimeHours.toFixed(2);
+
+    return overallTotalTimeRounded;
 }
+
+
+
 
 
 
