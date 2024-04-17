@@ -182,9 +182,10 @@ async function loadBeatmapPack(targetPackNumber) {
             targetPack.beatmaps.forEach(beatmap => {
                 const { beatmap_id, time_duration_seconds } = beatmap;
 
+                //This is the list thats being created, shows checkbox and beatmap id
                 const li = document.createElement("li");
                 li.setAttribute("data-beatmap", beatmap_id);
-                li.innerHTML = `<input type="checkbox" class="checkbox">${beatmap_id} (${time_duration_seconds})`;
+                li.innerHTML = `<input type="checkbox" class="checkbox">${beatmap_id}`;
 
                 // Add event listener to checkbox
                 const checkbox = li.querySelector(".checkbox");
@@ -196,7 +197,7 @@ async function loadBeatmapPack(targetPackNumber) {
                         totalDurationSeconds += time_duration_seconds;
                     }
                     // Update total duration list item
-                    totalLi.innerHTML = `Total Duration: ${totalDurationSeconds} seconds`;
+                    totalLi.innerHTML = `Time: ${totalDurationSeconds}`;
                 });
 
                 li.onclick = event => handleBeatmapClick(beatmap_id, event);
@@ -210,7 +211,7 @@ async function loadBeatmapPack(targetPackNumber) {
 
             // Create a separate list item for the total duration
             const totalLi = document.createElement("li");
-            totalLi.innerHTML = `Total Duration: ${totalDurationSeconds} seconds`;
+            totalLi.innerHTML = `Time: ${totalDurationSeconds}`;
             targetPackUl.appendChild(totalLi);
         } else {
             console.error(`Beatmap pack with number ${targetPackNumber} not found in the JSON file.`);
