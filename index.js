@@ -158,6 +158,16 @@ function createBeatmapButton(id) {
 }
 
 // Json Fetch Method, This is an important method to gather data from JSON and gets called for each button.
+// Global variable to store overall total time duration
+let overallTotalTimeDurationSeconds = 0;
+
+// Function to update overall total time duration in HTML
+function updateOverallTotalTimeDuration() {
+    const overallTotalTimeDurationElement = document.getElementById("overallTotalTimeDuration");
+    overallTotalTimeDurationElement.textContent = `Total Time: ${overallTotalTimeDurationSeconds}`;
+}
+
+// Json Fetch Method
 async function loadBeatmapPack(targetPackNumber) {
     try {
         // Load beatmap data from JSON file
@@ -175,14 +185,14 @@ async function loadBeatmapPack(targetPackNumber) {
             // Clear the existing content
             targetPackUl.innerHTML = '';
 
-            // Initialize total duration variable
+            // Initialize total duration variable for this pack
             let totalDurationSeconds = 0;
 
             // Loop through beatmap IDs and create list items
             targetPack.beatmaps.forEach(beatmap => {
                 const { beatmap_id, time_duration_seconds } = beatmap;
 
-                //This is the list thats being created, shows checkbox and beatmap id
+                //This is the list that's being created, shows checkbox and beatmap id
                 const li = document.createElement("li");
                 li.setAttribute("data-beatmap", beatmap_id);
                 li.innerHTML = `<input type="checkbox" class="checkbox">${beatmap_id}`;
@@ -198,6 +208,9 @@ async function loadBeatmapPack(targetPackNumber) {
                     }
                     // Update total duration list item
                     totalLi.innerHTML = `Time: ${totalDurationSeconds}`;
+                    // Update overall total time duration
+                    overallTotalTimeDurationSeconds = calculateOverallTotalTime();
+                    updateOverallTotalTimeDuration();
                 });
 
                 li.onclick = event => handleBeatmapClick(beatmap_id, event);
@@ -205,7 +218,7 @@ async function loadBeatmapPack(targetPackNumber) {
                 // Append li to ul
                 targetPackUl.appendChild(li);
 
-                // Accumulate total duration
+                // Accumulate total duration for this pack
                 totalDurationSeconds += time_duration_seconds;
             });
 
@@ -213,6 +226,10 @@ async function loadBeatmapPack(targetPackNumber) {
             const totalLi = document.createElement("li");
             totalLi.innerHTML = `Time: ${totalDurationSeconds}`;
             targetPackUl.appendChild(totalLi);
+
+            // Update overall total time duration after processing this pack
+            overallTotalTimeDurationSeconds = calculateOverallTotalTime();
+            updateOverallTotalTimeDuration();
         } else {
             console.error(`Beatmap pack with number ${targetPackNumber} not found in the JSON file.`);
         }
@@ -220,6 +237,23 @@ async function loadBeatmapPack(targetPackNumber) {
         console.error('Error loading beatmap data:', error);
     }
 }
+
+// Function to calculate overall total time duration
+function calculateOverallTotalTime() {
+    let overallTotalTime = 0;
+    // Iterate through each pack's total time duration and sum them up
+    const packLists = document.querySelectorAll("[id^=bp][id$=BeatmapList] li");
+    packLists.forEach(listItem => {
+        const timeString = listItem.textContent.split(": ")[1]; // Extracting the time duration string
+        const timeInSeconds = parseInt(timeString); // Parsing the time duration to an integer
+        if (!isNaN(timeInSeconds)) { // Checking if the parsed time is a valid number
+            overallTotalTime += timeInSeconds; // Accumulating the time duration
+        }
+    });
+    return overallTotalTime;
+}
+
+
 
 async function generateAndLoadBeatmapPacks(start, end) {
     let htmlCode = '';
