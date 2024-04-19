@@ -164,7 +164,8 @@ let overallTotalTimeDurationSeconds = 0;
 // Function to update overall total time duration in HTML
 function updateOverallTotalTimeDuration() {
     const overallTotalTimeDurationElement = document.getElementById("overallTotalTimeDuration");
-    overallTotalTimeDurationElement.textContent = `Total Time: ${overallTotalTimeDurationSeconds} h`;
+    const humanizedTime = calculateOverallTotalTime(); // Get the humanized time
+    overallTotalTimeDurationElement.textContent = `Total Time: ${humanizedTime}`;
 }
 
 // Json Fetch Method
@@ -251,19 +252,18 @@ function calculateOverallTotalTime() {
         }
     });
 
-    // Convert overall total time duration from seconds to hours with decimals
-    const overallTotalTimeHours = overallTotalTimeSeconds / 3600.0;
+    // Function to format time in hours and minutes
+    function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        return `${hours} hours and ${minutes} minutes`;
+    }
 
-    // Round the total time to 2 decimal places
-    const overallTotalTimeRounded = overallTotalTimeHours.toFixed(2);
+    // Convert total time duration to hours and minutes
+    const humanizedTime = formatTime(overallTotalTimeSeconds);
 
-    return overallTotalTimeRounded;
+    return humanizedTime;
 }
-
-
-
-
-
 
 async function generateAndLoadBeatmapPacks(start, end) {
     let htmlCode = '';
