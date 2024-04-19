@@ -298,14 +298,14 @@ async function generateAndLoadBeatmapPacks(start, end) {
 
 // Define a function to periodically update beatmap packs
 function updateBeatmapPacks() {
-    for (let i = 1; i <= 1407; i++) {
+    for (let i = 1; i <= 1414; i++) {
         loadBeatmapPack(i);
     }
 }
 
-// Call the function to generate HTML for beatmap packs 1 to 1407 and load them
+// Call the function to generate HTML for beatmap packs 1 to 1414 and load them
 document.addEventListener("DOMContentLoaded", function () {
-    generateAndLoadBeatmapPacks(1, 1407).then(() => {
+    generateAndLoadBeatmapPacks(1, 1414).then(() => {
         // After generating and loading the beatmap packs, start updating them periodically
         updateBeatmapPacks();
     });
