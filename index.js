@@ -1,3 +1,5 @@
+const beatmapsDict = {}
+
 //Download Button link
 function handleDownloadClick(beatmapId) {
     // Add your custom logic here if needed
@@ -5,6 +7,8 @@ function handleDownloadClick(beatmapId) {
 }
 
 function toggleBeatmapList(buttonId) {
+    buildList(buttonId.substring(3))
+
     var beatmapList = document.getElementById(`beatmapList${buttonId.substring(3)}`);
     var currentDisplay = window.getComputedStyle(beatmapList).display;
     beatmapList.style.display = (currentDisplay === "none") ? "block" : "none";
@@ -179,6 +183,40 @@ async function fetchBeatmapPacks(fileName) {
     }
 }
 
+function buildList(targetPackNumber) {
+    const targetPackUl = document.getElementById(`bp${targetPackNumber}BeatmapList`);
+    const totalLi = targetPackUl.getElementsByClassName("total-duration")[0];
+    let totalDurationSeconds = totalLi.dataset.totalDurationSeconds;
+
+    beatmapsDict[targetPackNumber].forEach(beatmap => {
+        const { beatmap_id, time_duration_seconds } = beatmap;
+        
+        //This is the list that's being created, shows checkbox and beatmap id
+        const li = document.createElement("li");
+        li.setAttribute("data-beatmap", beatmap_id);
+        li.innerHTML = `<input type="checkbox" class="checkbox">${beatmap_id}`;
+
+        // Add event listener to checkbox
+        const checkbox = li.querySelector(".checkbox");
+        checkbox.addEventListener("change", () => {
+            // Update total duration when checkbox state changes
+            if (checkbox.checked) {
+                totalDurationSeconds -= time_duration_seconds;
+            } else {
+                totalDurationSeconds += time_duration_seconds;
+            }
+            // Update total duration list item
+            totalLi.innerHTML = `Time: ${totalDurationSeconds}`;
+            updateOverallTotalTimeDuration();
+        });
+
+        li.onclick = event => handleBeatmapClick(beatmap_id, event);
+
+        // Append li to ul
+        targetPackUl.appendChild(li);
+    });
+}
+
 async function loadBeatmapPack(beatmapPacks, targetPackNumber) {
     try {
         // Find the target pack with the matching number
@@ -197,41 +235,17 @@ async function loadBeatmapPack(beatmapPacks, targetPackNumber) {
 
             // Loop through beatmap IDs and create list items
             targetPack.beatmaps.forEach(beatmap => {
-                const { beatmap_id, time_duration_seconds } = beatmap;
-
-                //This is the list that's being created, shows checkbox and beatmap id
-                const li = document.createElement("li");
-                li.setAttribute("data-beatmap", beatmap_id);
-                li.innerHTML = `<input type="checkbox" class="checkbox">${beatmap_id}`;
-
-                // Add event listener to checkbox
-                const checkbox = li.querySelector(".checkbox");
-                checkbox.addEventListener("change", () => {
-                    // Update total duration when checkbox state changes
-                    if (checkbox.checked) {
-                        totalDurationSeconds -= time_duration_seconds;
-                    } else {
-                        totalDurationSeconds += time_duration_seconds;
-                    }
-                    // Update total duration list item
-                    totalLi.innerHTML = `Time: ${totalDurationSeconds}`;
-                    // Update overall total time duration
-                    overallTotalTimeDurationSeconds = calculateOverallTotalTime();
-                    updateOverallTotalTimeDuration();
-                });
-
-                li.onclick = event => handleBeatmapClick(beatmap_id, event);
-
-                // Append li to ul
-                targetPackUl.appendChild(li);
-
+                const { time_duration_seconds } = beatmap;
                 // Accumulate total duration for this pack
                 totalDurationSeconds += time_duration_seconds;
             });
 
             // Create a separate list item for the total duration
             const totalLi = document.createElement("li");
+            totalLi.className = "total-duration"
             totalLi.innerHTML = `Time: ${totalDurationSeconds}`;
+            totalLi.dataset.totalDurationSeconds = totalDurationSeconds
+            beatmapsDict[targetPackNumber] = targetPack.beatmaps
             targetPackUl.appendChild(totalLi);
 
             // Update overall total time duration after processing this pack
@@ -312,9 +326,6 @@ function updateBeatmapPacks() {
 }
 
 // Call the function to generate HTML for beatmap packs 1 to 1414 and load them
-document.addEventListener("DOMContentLoaded", function () {
-    generateAndLoadBeatmapPacks(1, 1414).then(() => {
-        // After generating and loading the beatmap packs, start updating them periodically
-        updateBeatmapPacks();
-    });
+document.addEventListener("DOMContentLoaded", async function () {
+    await generateAndLoadBeatmapPacks(1, 1414)
 });
