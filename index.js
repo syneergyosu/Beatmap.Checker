@@ -1,4 +1,7 @@
+// include this variable to store buffered beatmap information, get ready for building lists
 const beatmapsDict = {}
+// in the color and percentage calculation, we have no idea about whether the list has been built
+// because the color and percentage calculation is strongly binded with list and hard to modify, we decide to include this variable to sign if the list was built
 const hasBuilt = []
 let totalCount = 0
 
