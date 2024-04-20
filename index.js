@@ -1,4 +1,6 @@
 const beatmapsDict = {}
+const hasBuilt = []
+let totalCount = 0
 
 //Download Button link
 function handleDownloadClick(beatmapId) {
@@ -44,6 +46,7 @@ function updateButtonColors() {
         var listId = button.getAttribute('data-list');
         var checkboxes = document.querySelectorAll(`#${listId} .checkbox`);
         var allCheckboxesAreTrue = Array.from(checkboxes).every(checkbox => checkbox.checked);
+        if (!hasBuilt.includes(listId.substring(11))) allCheckboxesAreTrue = false;
 
         if (allCheckboxesAreTrue) {
             button.style.backgroundColor = 'green';
@@ -59,7 +62,7 @@ function updateProgressBar() {
     var checkboxes = document.querySelectorAll('.checkbox:checked');
     var progressBar = document.getElementById('progressBar');
 
-    var totalCheckboxCount = document.querySelectorAll('.checkbox').length;
+    var totalCheckboxCount = totalCount;
     var checkedCheckboxCount = checkboxes.length;
 
     var allCheckboxesAreTrue = checkedCheckboxCount === totalCheckboxCount;
@@ -184,6 +187,8 @@ async function fetchBeatmapPacks(fileName) {
 }
 
 function buildList(targetPackNumber) {
+    if (hasBuilt.includes(targetPackNumber)) return;
+    hasBuilt.push(targetPackNumber)
     const targetPackUl = document.getElementById(`bp${targetPackNumber}BeatmapList`);
     const totalLi = targetPackUl.getElementsByClassName("total-duration")[0];
     let totalDurationSeconds = totalLi.dataset.totalDurationSeconds;
@@ -238,6 +243,7 @@ async function loadBeatmapPack(beatmapPacks, targetPackNumber) {
                 const { time_duration_seconds } = beatmap;
                 // Accumulate total duration for this pack
                 totalDurationSeconds += time_duration_seconds;
+                totalCount += 1;
             });
 
             // Create a separate list item for the total duration
