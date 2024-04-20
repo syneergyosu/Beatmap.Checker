@@ -168,15 +168,21 @@ function updateOverallTotalTimeDuration() {
     overallTotalTimeDurationElement.textContent = `Total Time: ${humanizedTime}`;
 }
 
-// Json Fetch Method
-async function loadBeatmapPack(targetPackNumber) {
+// Fetch once and cached for finding specific beatmap pack
+async function fetchBeatmapPacks(fileName) {
     try {
-        // Load beatmap data from JSON file
-        const response = await fetch('./data/BP-S1-S10.json');
-        const data = await response.json();
+        // Fetch beatmap packs data
+        const response = await fetch('./data/' + fileName);
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching beatmap packs:', error);
+    }
+}
 
+async function loadBeatmapPack(beatmapPacks, targetPackNumber) {
+    try {
         // Find the target pack with the matching number
-        const targetPack = data.find(pack => Number(pack.packName.split('S')[1]) === targetPackNumber);
+        const targetPack = beatmapPacks.find(pack => Number(pack.packName.split('S')[1]) === targetPackNumber);
 
         // If the target pack is found, create list items
         if (targetPack) {
@@ -290,9 +296,11 @@ async function generateAndLoadBeatmapPacks(start, end) {
     // Append the generated HTML to the document body
     document.body.innerHTML += htmlCode;
 
+    const beatmapPacks = await fetchBeatmapPacks("BP-S1-S10.json")
+
     // Call the loadBeatmapPack function for each beatmap pack after generating the HTML
     for (let i = start; i <= end; i++) {
-        await loadBeatmapPack(i); //this code made it load faster????
+        await loadBeatmapPack(beatmapPacks, i); //this code made it load faster????
     }
 }
 
