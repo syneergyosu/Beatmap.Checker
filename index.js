@@ -148,6 +148,8 @@ function updateButtonColorsForAllLists() {
             button.style.backgroundColor = ''; // Reset to default color
         }
     }
+
+    updateProgressBar();
 }
 
 function updateFileName() {
