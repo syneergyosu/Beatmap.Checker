@@ -111,10 +111,42 @@ function importBeatmaps() {
                 }
             });
 
-            updateButtonColors(); // Update button colors after changing checkbox states
+            // Build all lists before updating button colors
+            buildAllLists();
+
+            // Update button colors after importing beatmaps
+            updateButtonColorsForAllLists();
         };
 
         reader.readAsText(file);
+    }
+}
+
+// Function to build all lists
+function buildAllLists() {
+    for (const packNumber in beatmapsDict) {
+        buildList(packNumber);
+    }
+}
+
+// Function to update button colors for all lists after comparing the file
+function updateButtonColorsForAllLists() {
+    // Iterate over beatmap packs and update button colors for each list
+    for (const packNumber in beatmapsDict) {
+        if (!hasBuilt.includes(packNumber)) {
+            // If the list hasn't been built yet, continue to the next pack
+            continue;
+        }
+
+        var checkboxes = document.querySelectorAll(`#bp${packNumber}BeatmapList .checkbox`);
+        var allCheckboxesAreTrue = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+        var button = document.querySelector(`[data-list="beatmapList${packNumber}"]`);
+        if (allCheckboxesAreTrue) {
+            button.style.backgroundColor = 'green';
+        } else {
+            button.style.backgroundColor = ''; // Reset to default color
+        }
     }
 }
 
