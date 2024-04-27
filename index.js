@@ -295,6 +295,8 @@ async function loadBeatmapPack(beatmapPacks, targetPackNumber) {
             // Update overall total time duration after processing this pack
             overallTotalTimeDurationSeconds = calculateOverallTotalTime();
             updateOverallTotalTimeDuration();
+            updateProgressBar();
+
         } else {
             console.error(`Beatmap pack with number ${targetPackNumber} not found in the JSON file.`);
         }
@@ -354,7 +356,7 @@ async function generateAndLoadBeatmapPacks(start, end) {
     // Append the generated HTML to the document body
     document.body.innerHTML += htmlCode;
 
-    const beatmapPacks = await fetchBeatmapPacks("BP-S1-S10.json")
+    const beatmapPacks = await fetchBeatmapPacks("packs.json")
 
     // Call the loadBeatmapPack function for each beatmap pack after generating the HTML
     for (let i = start; i <= end; i++) {
@@ -364,12 +366,12 @@ async function generateAndLoadBeatmapPacks(start, end) {
 
 // Define a function to periodically update beatmap packs
 function updateBeatmapPacks() {
-    for (let i = 1; i <= 1414; i++) {
+    for (let i = 1; i <= 1417; i++) {
         loadBeatmapPack(i);
     }
 }
 
 // Call the function to generate HTML for beatmap packs 1 to 1414 and load them
 document.addEventListener("DOMContentLoaded", async function () {
-    await generateAndLoadBeatmapPacks(1, 1414)
+    await generateAndLoadBeatmapPacks(1, 1417)
 });
