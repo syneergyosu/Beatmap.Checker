@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
 </head>
 <body>
-    <h5>import File, then press compare one time and wait, and then do it again it will then compare all lists
-    </h5>
     <!--<h5>To Fix : Time Deduction on import and export file button</h5>-->
-    <h1>Beatmap Checker</h1>
     <!--Progress Bar Section-->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"> 0.00%</div>
@@ -19,11 +16,11 @@
 
     <!-- File Upload Section -->
     <div class="file-upload-container">
-        <label for="fileInput" class="file-button">Import File</label>
+        <label for="fileInput" class="file-button">Import</label>
         <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="updateFileName()">
-        <span id="fileName">No file chosen</span>
-        <button class="export-button" onclick="exportBeatmaps()">Export File</button>
-        <button class="import-button" onclick="importBeatmaps()">Compare File</button>
+        <span id="fileName">".txt"</span>
+        <button class="export-button" onclick="exportBeatmaps()">Export</button>
+        <button class="import-button" onclick="importBeatmaps()">Compare</button>
         <span id="uncheckedCount">Uncleared: 0</span>
     </div>
 

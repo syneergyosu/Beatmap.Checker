@@ -52,18 +52,33 @@ h1 {
 .file-button {
     background-color: #3498db; /* Change the color as needed */
     color: #fff; /* White text color */
+    transition: opacity 0.15s;
+}
+
+.file-button:hover{
+    opacity:0.7;
 }
 
 .import-button {
     background-color: #3498db; /* Change the color as needed */
     color: #fff; /* White text color */
     margin-left: 10px;
+    transition: opacity 0.15s;
+}
+
+.import-button:hover {
+    opacity: 0.7;
 }
 
 .export-button {
     background-color: #3498db; /* Change the color as needed */
     color: #fff; /* White text color */
     margin-left: 10px; /* Add margin for spacing */
+    transition: opacity 0.15s;
+}
+
+.export-button:hover {
+    opacity: 0.7;
 }
 
 #fileName {
@@ -72,18 +87,24 @@ h1 {
 }
 
 .progress-container {
-    width: 100%;
+    width: 92%;
     background-color: #444; /* Darker background color */
     margin-bottom: 10px;
+    border: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 10px;
 }
 
 .progress-bar {
-    height: 20px;
+    height: 30px;
     background-color: #4CAF50;
-    width: 0;
+    width: 0px;
     text-align: center;
-    line-height: 20px;
+    line-height: 30px;
     color: white;
+    font-weight: bold;
+    border-radius: 10px;
 }
 
 /*Button itself*/
@@ -91,6 +112,7 @@ h1 {
     display: flex;
     margin-top: 5px;
 }
+
 
 /*Drop-down menu for button*/
 .dropdown-container {
@@ -114,6 +136,10 @@ h1 {
 
 .beatmap-button {
     margin-left: 0;
+}
+
+.beatmap-button:hover{
+    opacity: 0.5;
 }
 
 .beatmap-list {

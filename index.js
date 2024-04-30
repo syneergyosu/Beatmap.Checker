@@ -6,6 +6,9 @@ const hasBuilt = []
 // percentage calculation needs to get to know how many maps we do have overall
 let totalCount = 0
 
+//The amount of beatmap packs, if the pack doesnt contain in the json the button will have empty list.
+const totalBeatmapPacks = 1417
+
 //Download Button link
 function handleDownloadClick(beatmapId) {
     // Add your custom logic here if needed
@@ -49,13 +52,15 @@ function updateButtonColors() {
     dropdownButtons.forEach(function (button) {
         var listId = button.getAttribute('data-list');
         var checkboxes = document.querySelectorAll(`#${listId} .checkbox`);
-        var allCheckboxesAreTrue = Array.from(checkboxes).every(checkbox => checkbox.checked);
-        if (!hasBuilt.includes(listId.substring(11))) allCheckboxesAreTrue = false;
+        var checkedCheckboxes = document.querySelectorAll(`#${listId} .checkbox:checked`);
+        var totalCheckboxes = checkboxes.length;
 
-        if (allCheckboxesAreTrue) {
-            button.style.backgroundColor = 'green';
+        if (checkedCheckboxes.length === 0) {
+            button.style.backgroundColor = '#8B0000'; // Dark red
+        } else if (checkedCheckboxes.length === totalCheckboxes) {
+            button.style.backgroundColor = '#006400'; // Dark green
         } else {
-            button.style.backgroundColor = ''; // Reset to default color
+            button.style.backgroundColor = '#263759'; // Dark yellow
         }
     });
 
@@ -75,10 +80,10 @@ function updateProgressBar() {
     progressBar.style.width = progressPercentage + '%';
     progressBar.innerText = progressPercentage.toFixed(2) + '%';
 
-    console.log(`Total Checkboxes: ${totalCheckboxCount}, Checked Checkboxes: ${checkedCheckboxCount}`);
-    console.log("Total Checkboxes:", totalCheckboxCount);
-    console.log("Checked Checkboxes:", checkedCheckboxCount);
-    console.log("All Checkboxes Are True:", allCheckboxesAreTrue);
+    //console.log(`Total Checkboxes: ${totalCheckboxCount}, Checked Checkboxes: ${checkedCheckboxCount}`);
+    //console.log("Total Checkboxes:", totalCheckboxCount);
+    //console.log("Checked Checkboxes:", checkedCheckboxCount);
+    //console.log("All Checkboxes Are True:", allCheckboxesAreTrue);
 
     // Calculate unchecked count and update in display
     var uncheckedCount = totalCheckboxCount - checkedCheckboxCount;
@@ -150,6 +155,7 @@ function updateButtonColorsForAllLists() {
     }
 
     updateProgressBar();
+    updateButtonColors();
 }
 
 function updateFileName() {
@@ -366,12 +372,12 @@ async function generateAndLoadBeatmapPacks(start, end) {
 
 // Define a function to periodically update beatmap packs
 function updateBeatmapPacks() {
-    for (let i = 1; i <= 1417; i++) {
+    for (let i = 1; i <= totalBeatmapPacks; i++) {
         loadBeatmapPack(i);
     }
 }
 
 // Call the function to generate HTML for beatmap packs 1 to 1414 and load them
 document.addEventListener("DOMContentLoaded", async function () {
-    await generateAndLoadBeatmapPacks(1, 1417)
+    await generateAndLoadBeatmapPacks(1, totalBeatmapPacks)
 });
