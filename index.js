@@ -9,18 +9,6 @@ let totalCount = 0
 //The amount of beatmap packs, if the pack doesnt contain in the json the button will have empty list.
 const totalBeatmapPacks = 1421
 
-console.log('Fetching user data');
-fetch('https://akatsuki.gg/api/v1/users/scores/best?id=16625&rx=1')
-    .then(res => {
-        if(res.ok){
-            console.log('SUCCESS')
-        } else {
-            console.log('Not Successful')
-        }
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
-
 //Download Button link
 function handleDownloadClick(beatmapId) {
     // Add your custom logic here if needed
