@@ -7,7 +7,7 @@ const hasBuilt = []
 let totalCount = 0
 
 //The amount of beatmap packs, if the pack doesnt contain in the json the button will have empty list.
-const totalBeatmapPacks = 1417
+const totalBeatmapPacks = 1421
 
 //Download Button link
 function handleDownloadClick(beatmapId) {
