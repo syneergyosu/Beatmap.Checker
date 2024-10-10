@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    margin: 0;
+    padding: 20px;
+}
+
+#app {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align children */
+}
+
+.beatmap-count {
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Space below the count */
+    font-size: 20px; /* Increase the font size for visibility */
+    font-weight: bold; /* Make it bold */
+}
+
+.packs-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows buttons to wrap into new rows */
+    gap: 5px; /* Adds space between buttons */
+    justify-content: center; /* Center content horizontally */
+}
+
+.pack-item {
+    flex: 0 1 calc(5% - 10px); /* Adjust width to fit 20 buttons in a row with some space */
+    position: relative; /* Allows absolute positioning of child elements */
+    margin-bottom: 0px; /* Space between pack items */
+}
+
+.pack-button {
+    width: 100%; /* Make button fill its container */
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pack-button:hover {
+    /*background-color: #0056b3;*/
+}
+
+.beatmaps-container {
+    position: absolute; /* Positions the container absolutely */
+    top: 100%; /* Position it below the button */
+    left: 50%; /* Center the container */
+    transform: translateX(-50%); /* Adjust position to be centered */
+    z-index: 10; /* Ensure it's on top of other elements */
+    background-color: #444; /* Set a background to make it visible */
+    border: 1px solid #ccc; /* Optional border for visibility */
+    padding: 10px; /* Optional padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    width: auto; /* Set a fixed width for the container */
+    overflow-y: auto; /* Add vertical scroll if needed */
+    color: white;
+}
+
+.beatmap-checkboxes {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.beatmap-checkboxes label {
+    display: flex; /* Use flexbox for label layout */
+    align-items: center; /* Center vertically */
+    margin-bottom: 5px; /* Space between checkboxes */
+}
+
+.beatmap-checkboxes input[type="checkbox"] {
+    margin-right: 5px; /* Space between checkbox and beatmap ID */
+}
+
+/*Progress Bar*/
+.progress-container {
+    width: 100%; /* Full width */
+    background-color: #444; /* Light background */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Ensure the inner bar stays within */
+    margin: 20px 0; /* Space above and below the progress bar */
+}
+
+.progress-bar {
+    height: 20px; /* Height of the progress bar */
+    background-color: #055305; /* Green color for the progress */
+    transition: width 0.3s; /* Smooth transition */
+    position: relative; /* Position relative for absolute positioning of label */
+}
+
+.progress-label {
+    position: absolute; /* Position the label absolutely */
+    width: 100%; /* Full width to center it */
+    text-align: center; /* Center the text */
+    color: white; /* Text color */
+    font-weight: bold; /* Bold text */
+    line-height: 20px; /* Center vertically based on height of progress bar */
+}
+
+.red {
+    background-color: #440404; /* Red */
+}
+
+.yellow {
+    background-color: #806d05; /* Yellow */
+}
+
+.green {
+    background-color: #055305; /* Green */
+}
+
+.file-button-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center the elements horizontally */
+    gap: 10px; /* Space between each element */
+    margin-top: 20px; /* Space above the container */
+    margin-bottom: 20px; /* Space below the container */
+}
+
+.file-button-container input[type="file"],
+.file-button-container button,
+.file-button-container .beatmap-count {
+    width: 100%; /* Make each element take full width */
+    max-width: 300px; /* Optional: set a max-width for alignment */
+    text-align: center;
+    color:white;
+}

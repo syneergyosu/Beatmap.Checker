@@ -4,36 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beatmap Checker</title>
-    <link rel="stylesheet" href="index.css">
-
-    <!--Rubik Font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
-    <!--<h5>To Fix : Time Deduction on import and export file button</h5>-->
-    <!--Progress Bar Section-->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"> 0.00%</div>
+    <div id="app">
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" :style="{ width: progress + '%' }">
+                <span class="progress-label">{{ progress.toFixed(2) }}%</span>
+            </div>
+        </div>
+        
+        <!-- Container for file input and button -->
+        <div class="file-button-container">
+            <input type="file" @change="handleFileUpload" accept=".txt" />
+            <button @click="loadBeatmapIds">Compare Beatmaps</button>
+            <div class="beatmap-count">
+                Uncleared: {{ unclearedBeatmaps }}
+            </div>
+        </div>
+
+        <div class="packs-container"> <!-- Added a new container for packs -->
+            <div class="pack-item" v-for="pack in packs" :key="pack.packName">
+                <button class="pack-button" 
+                        :class="{'red': !areAnyBeatmapsChecked(pack), 'yellow': areSomeBeatmapsChecked(pack), 'green': areAllBeatmapsChecked(pack)}" 
+                        @click="toggleBeatmaps(pack)">
+                    {{ pack.packName }}
+                </button>
+                <div class="beatmaps-container" v-if="selectedPack && selectedPack.packName === pack.packName">
+                    <div class="beatmap-checkboxes">
+                        <label v-for="beatmap in pack.beatmaps" :key="beatmap.beatmap_id">
+                            <input type="checkbox" v-model="beatmap.checked" @change="updateProgress">
+                            {{ beatmap.beatmap_id }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- File Upload Section -->
-    <div class="file-upload-container">
-        <label for="fileInput" class="file-button">Import</label>
-        <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="updateFileName()">
-        <span id="fileName">".txt"</span>
-        <button class="export-button" onclick="exportBeatmaps()">Export</button>
-        <button class="import-button" onclick="importBeatmaps()">Compare</button>
-        <span id="uncheckedCount">Uncleared: 0</span>
-    </div>
-
-    <!--Total Time Duration Section-->
-    <span id="overallTotalTimeDuration">Total Time: 0</span>
-
-    <!-- Dynamic Buttons Section -->
-    <div id="container"></div>
-    <script src="index.js"></script>
+    <script src="app.js"></script>
 </body>
-</html >
+</html>

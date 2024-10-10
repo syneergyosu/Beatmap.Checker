@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beatmap Checker</title>
+    <link rel="stylesheet" href="index.css">
+
+    <!--Rubik Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!--<h5>To Fix : Time Deduction on import and export file button</h5>-->
+    <!--Progress Bar Section-->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"> 0.00%</div>
+    </div>
+
+    <!-- File Upload Section -->
+    <div class="file-upload-container">
+        <label for="fileInput" class="file-button">Import</label>
+        <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="updateFileName()">
+        <span id="fileName">".txt"</span>
+        <button class="export-button" onclick="exportBeatmaps()">Export</button>
+        <button class="import-button" onclick="importBeatmaps()">Compare</button>
+        <span id="uncheckedCount">Uncleared: 0</span>
+    </div>
+
+    <!--Total Time Duration Section-->
+    <span id="overallTotalTimeDuration">Total Time: 0</span>
+
+    <!-- Dynamic Buttons Section -->
+    <div id="container"></div>
+    <script src="index.js"></script>
+</body>
+</html >
