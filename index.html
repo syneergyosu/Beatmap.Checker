@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beatmap Checker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
@@ -21,6 +22,7 @@
         <div class="file-button-container">
             <input type="file" @change="handleFileUpload" accept=".txt" />
             <button @click="loadBeatmapIds">Compare Beatmaps</button>
+            <button @click="exportUncleared">Export Uncleared</button>
             <div class="beatmap-count">
                 Uncleared: {{ unclearedBeatmaps }}
             </div>
@@ -37,7 +39,9 @@
                     <div class="beatmap-checkboxes">
                         <label v-for="beatmap in pack.beatmaps" :key="beatmap.beatmap_id">
                             <input type="checkbox" v-model="beatmap.checked" @change="updateProgress">
-                            {{ beatmap.beatmap_id }}
+                            <a :href="'https://osu.ppy.sh/b/' + beatmap.beatmap_id" target="_blank" style="color: black; text-decoration: none;">
+                                {{ beatmap.beatmap_id }}
+                            </a>
                         </label>
                     </div>
                 </div>

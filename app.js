@@ -76,6 +76,26 @@ new Vue({
         },
         areAllBeatmapsChecked(pack) {
             return pack.beatmaps.every(beatmap => beatmap.checked);
+        },
+        exportUncleared() {
+            // Create text content for unchecked beatmaps with pack names
+            let textContent = '';
+            this.packs.forEach(pack => {
+                const uncheckedBeatmaps = pack.beatmaps.filter(b => !b.checked).map(b => b.beatmap_id);
+                if (uncheckedBeatmaps.length > 0) {
+                    textContent += `Pack Name: ${pack.packName}\n${uncheckedBeatmaps.join(',')}\n\n`;
+                }
+            });
+
+            // Create a downloadable text file
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'uncleared_beatmaps.txt';
+            link.click();
+
+            // Cleanup
+            URL.revokeObjectURL(link.href);
         }
     }
 });

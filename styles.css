@@ -1,8 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Rubik', sans-serif;
     background-color: #1a1a1a;
     margin: 0;
     padding: 20px;
+    color: white; /* Optional: set default text color */
 }
 
 #app {
@@ -119,14 +120,45 @@ body {
     align-items: center; /* Center the elements horizontally */
     gap: 10px; /* Space between each element */
     margin-top: 20px; /* Space above the container */
+    margin-bottom: 0px; /* Space below the container */
+}
+
+.file-button-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center the elements horizontally */
+    gap: 10px; /* Space between each element */
+    margin-top: 20px; /* Space above the container */
     margin-bottom: 20px; /* Space below the container */
 }
 
-.file-button-container input[type="file"],
-.file-button-container button,
-.file-button-container .beatmap-count {
-    width: 100%; /* Make each element take full width */
+.file-button-container button {
+    width: 100%; /* Make button fill its container */
     max-width: 300px; /* Optional: set a max-width for alignment */
     text-align: center;
+    color: white; /* Text color */
+    background-color: #629deb; /* Green background */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Add padding for better spacing */
+    font-size: 16px; /* Increase font size */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background and scale */
+}
+
+.file-button-container button:hover {
+    background-color: #6cb9e6; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.file-button-container button:active {
+    transform: scale(0.95); /* Slightly decrease size when clicked */
+}
+
+.file-button-container input[type="file"]{
     color:white;
+}
+
+.beatmap-count{
+    color: white;
 }
