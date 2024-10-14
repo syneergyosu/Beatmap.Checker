@@ -1,4 +1,4 @@
--Try to implement Vue.js framework for better performance and code efficiency
--Clean Up html Code?
--Try Different methods of displaying data, maybe use paging?
--Instead of GitHub host the site on an actual website? Pay or Free?
+Try to implement Vue.js framework for better performance and code efficiency [I think its done]
+Clean Up html Code
+Try Different methods of displaying data, maybe use paging? [x]
+Instead of GitHub host the site on an actual website? Pay or Free?
