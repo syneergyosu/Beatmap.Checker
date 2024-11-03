@@ -5,8 +5,8 @@ import time
 import os
 
 # Your client credentials
-CLIENT_ID = 
-API_KEY = ""
+CLIENT_ID = 31586
+API_KEY = "Sty09gmsufGNjadWZyhNftashebxHV7lML7YFJJy"
 
 # Initialize Ossapi client
 client = ossapi.Ossapi(client_id=CLIENT_ID, client_secret=API_KEY)
@@ -18,7 +18,7 @@ if os.path.exists("packs.json"):
         data = json.load(f)
 
 # Define the range of packs to fetch
-missing_packs = [f"S{x}" for x in range(1500,1510)]
+missing_packs = [f"S{x}" for x in range(1514,1520)] #requires a bit of edit
 
 # Fetch beatmap packs
 for pack_name in missing_packs:
